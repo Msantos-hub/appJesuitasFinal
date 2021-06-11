@@ -1,0 +1,120 @@
+html{
+    font-size: 20px;
+}
+
+#general{
+    background-color: floralwhite;
+    width: 900px;
+    margin: 0 auto;
+    border: 1px solid cornflowerblue;
+    padding: 10px;
+    text-align: center;
+    min-height: 878px;
+}
+
+#ultimasVisitas{
+    margin: 0 auto;
+    text-align: left;
+    padding-left: 80px;
+    width: 450px;
+}
+
+table{
+    border: 1px solid black;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.centrarvisita{
+    text-align: center;
+}
+
+h2{
+    text-align: center;
+}
+
+th{
+    text-align: center;
+    background-color: #33AFFF;
+    padding: 0px 10px;
+}
+
+td{
+    padding: 0px 5px;
+}
+
+a{
+    text-decoration: none;
+}
+
+/* pruebas nav*/
+
+nav{
+    width: 900px;
+    background-color: #006ea4;
+    margin: 0 auto;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+#menu{
+    width: 800px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+div[id*="link-"]{
+    flex-basis: 100px;
+    flex-grow: 1;
+}
+
+ul li{
+    list-style-type: none;
+}
+
+p{
+    color: white;
+}
+
+nav div a{
+    padding: 16px 12px;
+    color:white;
+    text-decoration: none;
+    flex-grow: 1;
+}
+
+nav div #contenido1{
+    float: left;
+    width: 300px;
+    color: white;
+}
+
+nav div #contenido2{
+    width: 300px;
+    float:right;
+}
+
+button {
+    border: none;
+    background-color: coral;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+form{
+    text-align: left;
+}
+
+#formvisita{
+    text-align: center;
+}
