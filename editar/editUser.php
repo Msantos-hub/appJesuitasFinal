@@ -28,14 +28,23 @@
                     echo '<input type="text" name="usuario" value="'.$fila['usuario'].'"><br>';
                     echo '<label>idJesuita </label>';
                     echo '<input type="text" name="idJesuita" value="'.$fila['idJesuita'].'"><br>';
-                    echo '<label>idLugar </label>';
-                    echo '<input type="text" name="idLugar" value="'.$fila['idLugar'].'"><br>';//desplegable que muestre el suyo propio y luego muestre los demas
+                    $lugar=$fila['idLugar'];
                     echo '<label>tipo </label>';
                     echo '<input type="text" name="tipo" value="'.$fila['tipo'].'"><br>';
                     echo '<label>idUsuario </label>';
                     echo '<input type="text" name="idUsuario" value="'.$fila['idUsuario'].'"><br>';
                     echo '<label>Password </label>';
-                    echo '<input type="text" name="password" value="'.$fila['password'].'"><hr>';
+                    echo '<input type="text" name="password" value="'.$fila['password'].'"><br>';
+                    echo '<label>Lugares</label>';
+                    echo '<select name="nLugares">';
+                    $sql2="SELECT * FROM lugar";
+                    $objeto->realizarConsultas($sql2);
+                    if($objeto->comprobarSelect()>0){
+                        while($fila=$objeto->extraerFilas()) {
+                            echo '<option value="'.$fila['idLugar'].'">'.$fila['nombre'].'</option>';
+                        }
+                    }
+                    echo '</select><br>';
                     echo '<input type="submit" value="Agregar usuario" name="enviar">';
                     echo '<a href="../listar/listUsers.php">Volver</a>';
                 }
