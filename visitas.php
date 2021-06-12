@@ -75,7 +75,6 @@
                         }else{
                             echo '<br/>El lugar seleccionado no esta disponible para visitar en este momento o no esta asignado a un jesuita.<br/>';
                         }
-                        echo 'Estas son los tres ultimos lugares visitados: '.$_COOKIE["visita"][0].' --- '.$_COOKIE["visita"][1].' --- '.$_COOKIE["visita"][2];
                     }
                 ?>
     </div>

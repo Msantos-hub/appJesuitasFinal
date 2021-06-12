@@ -143,10 +143,17 @@
             echo' No hay lugares sin visitar';
         }
         echo '</div>';
+
+//        if (!isset($_COOKIE["visita"])){
+//            setcookie("visita[]", "No hay visitas aun", time() + 0);
+//        }
+//        if (isset($_COOKIE["visita"])){
+//            $_COOKIE["visita"][2]=$_COOKIE["visita"][1];
+//            $_COOKIE["visita"][1]=$_COOKIE["visita"][0];
+//            $_COOKIE["visita"][0]=$nombrelugar;
+//        }
+//        echo 'Estas son los tres ultimos lugares visitados: '.$_COOKIE["visita"][0].' --- '.$_COOKIE["visita"][1].' --- '.$_COOKIE["visita"][2];
         ?>
-
-
-
     </div>
     </body>
 </html>
