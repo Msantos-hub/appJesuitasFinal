@@ -8,7 +8,7 @@ class procesosApp
         // Establece la conexion
         $this->mysqli = new mysqli(servidor, usuario, password, basedatos);
 
-        // Analizar Consulta
+        // Prepara la Consulta
         $consulta = $this->mysqli->prepare("SELECT * FROM maquina WHERE usuario=? AND tipo=?");
 
         // Preparar Consulta
