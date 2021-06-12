@@ -49,8 +49,19 @@
                         echo '<input type="submit" value="Realizar Visita" name="enviar">';
                         echo '</form>';
 
+                        setcookie("visita","No hay visitas aun",time()+0);
+
+                        echo $_COOKIE["visita"];
+                        echo '<br>';
+
                     if (isset($_POST['enviar'])){
                         $idLugar = $_POST['nLugares'];
+                        $sql="SELECT * FROM Lugar WHERE idLugar= '$idLugar'";
+                        $objeto->realizarConsultas($sql);
+                        $fila=$objeto->extraerFilas();
+                        $nombrelugar=$fila['nombre'];
+
+
                         $sql3="SELECT * FROM maquina WHERE idlugar='$idLugar'";
                         $objeto->realizarConsultas($sql3);
 
@@ -65,14 +76,18 @@
                                 echo 'La Visita se realizo correctamente.';
                                 echo '<br>';
                                 echo 'Visita otro lugar.';
+                                if (isset($_COOKIE["visita"])){
+                                    $_COOKIE["visita"][2]=$_COOKIE["visita"][1];
+                                    $_COOKIE["visita"][1]=$_COOKIE["visita"][0];
+                                    $_COOKIE["visita"][0]=$nombrelugar;
+                                }
                             } else {
                                 echo 'La visita no se a realizado correctamente';
                             }
                         }else{
-                            echo 'El lugar seleccionado no esta disponible para visitar en este momento o no esta asignado a un jesuita.';
+                            echo 'El lugar seleccionado no esta disponible para visitar en este momento o no esta asignado a un jesuita.<br/>';
                         }
-
-
+                        echo 'Estas son las tres ultimas visitas realizadas: '.$_COOKIE['visita'][0].' --- '.$_COOKIE['visita'][1].' --- '.$_COOKIE['visita'][2];
                     }
                     echo '<a href="paginaInicio.php">Volver</a>';
                 ?>
