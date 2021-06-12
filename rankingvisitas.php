@@ -132,27 +132,42 @@
                 INNER JOIN Jesuita  ON visita.idJesuita=jesuita.idJesuita 
                 GROUP BY visita.idJesuita ORDER BY contador DESC LIMIT 5";
         $objeto->realizarConsultas($sql);
-        echo '<h2>Lugares sin visitar</h2>';
-        if ($objeto->comprobar()==0){
-            while($fila=$objeto->extraerFilas())
-            {
-                echo 'Nombre:'.$fila["nombre"].'<br/>';
+        echo '<div>';
+            echo '<h2>Lugares sin visitar</h2>';
+            if ($objeto->comprobar()==0){
+                while($fila=$objeto->extraerFilas())
+                {
+                    echo 'Nombre:'.$fila["nombre"].'<br/>';
+                }
             }
-        }
-        else{
-            echo' No hay lugares sin visitar';
-        }
+            else{
+                echo' No hay lugares sin visitar';
+            }
         echo '</div>';
 
-//        if (!isset($_COOKIE["visita"])){
-//            setcookie("visita[]", "No hay visitas aun", time() + 0);
-//        }
-//        if (isset($_COOKIE["visita"])){
-//            $_COOKIE["visita"][2]=$_COOKIE["visita"][1];
-//            $_COOKIE["visita"][1]=$_COOKIE["visita"][0];
-//            $_COOKIE["visita"][0]=$nombrelugar;
-//        }
-//        echo 'Estas son los tres ultimos lugares visitados: '.$_COOKIE["visita"][0].' --- '.$_COOKIE["visita"][1].' --- '.$_COOKIE["visita"][2];
+//        $sql="SELECT COUNT(visita.idJesuita) AS visita, jesuita.nombre AS nombre
+//                    FROM visita
+//                    INNER JOIN Jesuita ON jesuita.idJesuita=visita.idJesuita
+//                    ORDER BY visita asc LIMIT 3";
+//        $objeto->realizarConsultas($sql);
+//        echo '<div>';
+//            if ($objeto->comprobar()>0){
+//                $fila=$objeto->extraerFilas();
+//            }
+//            $nombrelugar=$fila['nombre'];
+//
+//            if (!isset($_COOKIE['visita'])){
+//                setcookie('visita[0]',$nombrelugar, time() + 0);
+//            }
+//            if (isset($_COOKIE['visita'])){
+//                $_COOKIE['visita'][2]=$_COOKIE['visita'][1];
+//                $_COOKIE['visita'][1]=$_COOKIE['visita'][0];
+//                $_COOKIE['visita'][0]=$nombrelugar;
+//            }
+//            foreach ($_COOKIE['visita'] AS $lugares){
+//                echo 'Estas son los tres ultimos lugares visitados: '.$lugares.' --- '.$lugares.' --- '.$lugares;
+//            }
+        echo '</div>';
         ?>
     </div>
     </body>
