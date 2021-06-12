@@ -8,7 +8,7 @@
 <body>
 <nav>
     <div id="menu">
-        <div id="link-1"><a href="../crud.html">Inicio</a></div>
+        <div id="link-1"><a href="crud.html">Inicio</a></div>
     </div>
 </nav>
 <div id="general">
@@ -24,7 +24,7 @@
         $objeto->realizarConsultas($sql);
         if($objeto->comprobarSelect()>0){
             while($fila=$objeto->extraerFilas()){
-                echo '<option value="'.$fila['idJesuita'].'">'.$fila['nombre'].'</option>';
+                echo '<option value="'.$fila['idJesuita'].'">'.$fila['Nombre'].'</option>';
             }
         }else{
             echo 'Consulta no se a realizado correctamente1';
@@ -46,8 +46,8 @@
 
         if (isset($_POST['enviar'])){
             $idjesuita=$_POST['nJesuita'];
-            $idlugar=$_POST['nLugar'];
-            $sql3="INSERT INTO maquina(idJesuita,idLugar) VALUES('".$idjesuita."',.$idlugar.)";
+            $idlugar=$_POST['nLugares'];
+            $sql3="UPDATE maquina SET idlugar=$idlugar WHERE ip='".$idjesuita."'";
             $objeto->realizarConsultas($sql3); //consulta de insercion de datos
             if ($objeto->comprobar()>0) {
                 echo '<br>';
