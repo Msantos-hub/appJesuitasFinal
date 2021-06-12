@@ -47,7 +47,7 @@
                             echo '<option value="'.$fila['idLugar'].'">'.$fila['nombre'].'</option>';
                         }
                     }
-                    echo '</select><br>';
+                    echo '</select><br><hr>';
                     echo '<input type="submit" value="Agregar usuario" name="enviar">';
                     echo '<a href="../listar/listUsers.php">Volver</a>';
                 }
