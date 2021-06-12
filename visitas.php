@@ -23,8 +23,7 @@
                     include 'Operaciones.php';
                     $objeto=new operaciones();
                     $usuario = $_SESSION['usuario'];
-                    if (isset($_POST['enviar']))
-                    {
+
                         $sql1="SELECT idJesuita FROM maquina WHERE usuario='$usuario'";
                         $objeto->realizarConsultas($sql1);
                         if($objeto->comprobarSelect()>0){
@@ -50,16 +49,15 @@
                         echo '<input type="submit" value="Realizar Visita" name="enviar">';
                         echo '</form>';
 
+                    if (isset($_POST['enviar'])){
                         $idLugar = $_POST['nLugares'];
-                        $sql="SELECT idJesuita,idLugar FROM maquina WHERE idlugar='$idLugar'";
-                        $objeto->realizarConsultas($sql2);
+                        $sql3="SELECT * FROM maquina WHERE idlugar='$idLugar'";
+                        $objeto->realizarConsultas($sql3);
+
                         if($objeto->comprobarSelect()>0){
                             $fila=$objeto->extraerFilas();
-                        }else{
-                            echo 'Consulta no se a realizado correctamente3';
-                        }
-                        $idJesuita2=$fila['idJesuita'];
-                        if ($idLugar != NULL){ //si los valores son distintos a null entra en el bucle
+                            $idJesuita2 = $fila['idJesuita'];
+
                             $sql3="INSERT INTO visita (ip,idJesuita,idLugar,fechaHora) VALUES ('".$idJesuita."','".$idJesuita2."','".$idLugar."', NOW())"; //consulta de insercion de datos
                             $objeto->realizarConsultas($sql3); //consulta de insercion de datos
                             if ($objeto->comprobar()>0) {
@@ -71,8 +69,10 @@
                                 echo 'La visita no se a realizado correctamente';
                             }
                         }else{
-                            echo 'Debe elegir un lugar.';
+                            echo 'El lugar seleccionado no esta disponible para visitar en este momento o no esta asignado a un jesuita.';
                         }
+
+
                     }
                     echo '<a href="paginaInicio.php">Volver</a>';
                 ?>
