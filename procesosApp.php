@@ -25,7 +25,8 @@ class procesosApp
         {
             $fila = $resultado->fetch_array();
 
-            if($password == $fila["password"])
+            echo '<br>'.$fila["password"].'';
+            if (password_verify($password, $fila["password"]))
             {
                 // Usuario correcto
                 return 'true';

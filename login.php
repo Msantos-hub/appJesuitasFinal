@@ -32,15 +32,9 @@
 
             if($resultado == 'true')
             { //si el resultado  es true entre en el bucle
-                echo $password ;
-                echo $resultado['resultado'];
-                if (password_verify($password, $resultado['password'])){
-                    echo '<p class="success">inicio correcto</p>';
-                    $_SESSION['usuario'] = $usuario; // guarda el correo en la sesion
-                       //header('location:paginaInicio.php'); //redirige a otra pagina
-                }else{
-                    echo '<p class="error">Error la contraseña es erronea.</p>';
-                }
+                echo '<p class="success">inicio correcto</p>';
+                $_SESSION['usuario'] = $usuario; // guarda el correo en la sesion
+                header('location:paginaInicio.php');
             }else{
                 echo '<p class="error">Error el usuario o la contraseña son incorrectos.</p>';
             }

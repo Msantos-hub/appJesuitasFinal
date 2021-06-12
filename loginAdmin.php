@@ -28,13 +28,14 @@
 
             $resultado=$objeto->iniciosession($usuario,$password,$tipo); // ejecuta la funcion inicio sesion
 
-            if($resultado=='true'){ // si el resultado  es true entre en el bucle
-                    echo '<p class="success">inicio correcto</p>';
-                    $_SESSION['usuario'] = $usuario; // guarda el correo en la sesion
-                    header('location:crud.html'); //redirige a otra pagina
-                }else{
-                    echo '<p class="error">Error el usuario o la contraseña son incorrectos</p>';
-                }
+            if($resultado == 'true')
+            { //si el resultado  es true entre en el bucle
+                echo '<p class="success">inicio correcto</p>';
+                $_SESSION['usuario'] = $usuario; // guarda el correo en la sesion
+                header('location:crud.html');
+            }else{
+                echo '<p class="error">Error el usuario o la contraseña son incorrectos.</p>';
+            }
         }
     ?>
 </form>
