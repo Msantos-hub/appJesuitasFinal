@@ -19,10 +19,6 @@
         <form method="post" id="formvisita">
                 <?php
                     session_start();
-                    if (!isset($_COOKIE["visita"])){
-                        setcookie("visita[]", "No hay visitas aun", time() + 0);
-                    }
-
                     include 'Operaciones.php';
                     $objeto=new operaciones();
                     $usuario = $_SESSION['usuario'];
@@ -73,11 +69,6 @@
                                 echo 'La Visita se realizo correctamente.';
                                 echo '<br>';
                                 echo 'Visita otro lugar.';
-//                                if (isset($_COOKIE["visita"])){
-//                                    $_COOKIE["visita"][2]=$_COOKIE["visita"][1];
-//                                    $_COOKIE["visita"][1]=$_COOKIE["visita"][0];
-//                                    $_COOKIE["visita"][0]=$nombrelugar;
-//                                }
                             } else {
                                 echo 'La visita no se a realizado correctamente';
                             }

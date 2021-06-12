@@ -20,7 +20,11 @@
             $objeto=new operaciones();
 
             /*Consulta para mostrar los 5 lugares con mas visitas*/
-            $sql="select v.ip,lugar, count(v.ip) AS contador from Visita v INNER JOIN Lugar l ON l.ip=v.ip group by v.ip having contador ORDER by contador desc LIMIT 5";
+            $sql="select count(visita.idlugar) AS contador, lugar.nombre as nombre
+                    from visita
+                    INNER JOIN lugar ON lugar.idlugar=visita.idlugar 
+                    group by visita.idlugar 
+                    ORDER by contador desc LIMIT 5";
             $objeto->realizarConsultas($sql);
             echo '<div>';
                 echo '<h2>Ranking 5 Lugares Mas Visitados</h2>';
@@ -30,7 +34,7 @@
                                 echo '<th>Ciudad</th><th>Numero de visitas</th>';
                                 while($fila=$objeto->extraerFilas())
                                 {
-                                    echo '<tr><td>'.$fila["lugar"].'</td> <td class="centrarvisita">'.$fila["contador"].'</td></tr>';
+                                    echo '<tr><td>'.$fila["nombre"].'</td> <td class="centrarvisita">'.$fila["contador"].'</td></tr>';
                                 }
                             echo '</tr>';
                         echo '</table>';
@@ -41,7 +45,10 @@
             echo '</div>';
 
             /*Consulta para mostrar los 5 jesuitas con mas visitas*/
-            $sql="SELECT v.idJesuita,j.nombre, COUNT(*) AS visitas FROM Visita v INNER JOIN Jesuita j ON v.idJesuita=j.idJesuita GROUP BY idJesuita ORDER BY COUNT(*) DESC LIMIT 5";
+            $sql="SELECT COUNT(visita.idJesuita) AS visita, jesuita.nombre AS nombre 
+                    FROM visita 
+                    INNER JOIN Jesuita ON jesuita.idJesuita=visita.idJesuita 
+                    GROUP BY visita.idJesuita ORDER BY visita DESC LIMIT 5";
             $objeto->realizarConsultas($sql);
             echo '<div>';
                 echo '<h2>Ranking 5 Jesuitas Mas Viajeros</h2>';
@@ -51,7 +58,7 @@
                                     echo '<th>Lugar</th> <th>Numero de visitas</th>';
                                     while($fila=$objeto->extraerFilas())
                                     {
-                                        echo '<tr><td>'.$fila["nombre"].'</td> <td class="centrarvisita">'.$fila["visitas"].'</td></tr>';
+                                        echo '<tr><td>'.$fila["nombre"].'</td> <td class="centrarvisita">'.$fila["visita"].'</td></tr>';
                                     }
                                 echo '</tr>';
                             echo '</table>';
@@ -62,7 +69,11 @@
             echo '</div>';
 
             /*Consulta para mostrar los 5 visitas*/
-            $sql="SELECT nombre, lugar, DATE_FORMAT(fechaHora, '%H:%I:%S' ) as hora   FROM Visita v INNER JOIN Jesuita j ON v.idJesuita=j.idJesuita INNER JOIN Lugar l ON v.ip=l.ip ORDER BY fechaHora DESC LIMIT 5";
+            $sql="SELECT jesuita.nombre as nombre, lugar.nombre as lugar, DATE_FORMAT(fechaHora, '%H:%I:%S' ) as hora 
+                    FROM Visita  
+                    INNER JOIN Jesuita  ON visita.idJesuita=jesuita.idJesuita 
+                    INNER JOIN Lugar  ON visita.idlugar=lugar.idlugar 
+                    ORDER BY hora DESC LIMIT 5";
             $objeto->realizarConsultas($sql);
             echo '<div>';
                 echo '<h2>Ultimas 5 Visitas</h2>';
@@ -79,7 +90,9 @@
                 }
             echo '</div>';
 
-            $sql="SELECT COUNT(*) FROM Visita";
+
+            //total de visitas
+            $sql="SELECT COUNT(numVisita) as total FROM Visita";
             $objeto->realizarConsultas($sql);
             echo '<div>';
                 echo '<h2>Total de visitas realizadas</h2>';
@@ -87,7 +100,7 @@
                     echo '<div id="ultimasVisitas">';
                     while($fila=$objeto->extraerFilas())
                     {
-                        echo $fila["idVisita"].'Visitas realizadas.<br>';
+                        echo 'total de visitas realizadas '.$fila["total"].'<br>';
                     }
                     echo '</div>';
                 }
@@ -96,7 +109,10 @@
                 }
             echo '</div>';
 
-            $sql="select v.ip,lugar, count(v.ip) AS contador from Visita v INNER JOIN Lugar l ON l.ip=v.ip group by v.ip having contador ORDER by contador desc";
+            $sql="select COUNT(visita.idlugar) as contador, lugar.nombre as nombre
+                    from Visita  
+                    INNER JOIN lugar ON lugar.idlugar=visita.idlugar 
+                    group by visita.idlugar ORDER by contador desc";
             $objeto->realizarConsultas($sql);
             echo '<div>';
             echo '<h2>Jesuitas sin viajar</h2>';
@@ -111,7 +127,10 @@
             }
             echo '</div>';
 
-        $sql="SELECT v.idJesuita,j.nombre, COUNT(*) AS visitas FROM visita v INNER JOIN Jesuita j ON v.idJesuita=j.idJesuita GROUP BY idJesuita ORDER BY COUNT(*) DESC LIMIT 5";
+        $sql="SELECT COUNT(visita.idJesuita) AS contador ,jesuita.nombre as nombre 
+                FROM visita  
+                INNER JOIN Jesuita  ON visita.idJesuita=jesuita.idJesuita 
+                GROUP BY visita.idJesuita ORDER BY contador DESC LIMIT 5";
         $objeto->realizarConsultas($sql);
         echo '<h2>Lugares sin visitar</h2>';
         if ($objeto->comprobar()==0){
@@ -125,6 +144,8 @@
         }
         echo '</div>';
         ?>
+
+
 
     </div>
     </body>
