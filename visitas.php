@@ -20,6 +20,10 @@
         <form method="post" id="formvisita">
                 <?php
                     session_start();
+                    if (!isset($_COOKIE["visita"])){
+                        setcookie("visita[]", "No hay visitas aun", time() + 0);
+                    }
+
                     include 'Operaciones.php';
                     $objeto=new operaciones();
                     $usuario = $_SESSION['usuario'];
@@ -32,8 +36,7 @@
                         }else{
                             echo 'Consulta no se a realizado correctamente1';
                         }
-                        echo '<label>Jesuita</label>';
-                        echo '<p>'.$idJesuita.'</p><br>';
+                        echo '<h4>Selecciona el lugar que quieres visitar.</h4>';
                         echo '<label>Lugares</label>';
                         echo '<select name="nLugares">';
                         $sql2="SELECT * FROM Lugar";
@@ -45,14 +48,9 @@
                         }else{
                             echo 'Consulta no se a realizado correctamente2';
                         }
-                        echo '</select><br>';
-                        echo '<input type="submit" value="Realizar Visita" name="enviar">';
+                        echo '</select><br><hr>';
+                        echo '<input type="submit" value="Realizar Visita" name="enviar">  <a href="paginaInicio.php">Volver</a>';
                         echo '</form>';
-
-                        setcookie("visita","No hay visitas aun",time()+0);
-
-                        echo $_COOKIE["visita"];
-                        echo '<br>';
 
                     if (isset($_POST['enviar'])){
                         $idLugar = $_POST['nLugares'];
@@ -85,11 +83,10 @@
                                 echo 'La visita no se a realizado correctamente';
                             }
                         }else{
-                            echo 'El lugar seleccionado no esta disponible para visitar en este momento o no esta asignado a un jesuita.<br/>';
+                            echo '<br/>El lugar seleccionado no esta disponible para visitar en este momento o no esta asignado a un jesuita.<br/>';
                         }
-                        echo 'Estas son las tres ultimas visitas realizadas: '.$_COOKIE['visita'][0].' --- '.$_COOKIE['visita'][1].' --- '.$_COOKIE['visita'][2];
+                        echo 'Estas son los tres ultimos lugares visitados: '.$_COOKIE["visita"][0].' --- '.$_COOKIE["visita"][1].' --- '.$_COOKIE["visita"][2];
                     }
-                    echo '<a href="paginaInicio.php">Volver</a>';
                 ?>
     </div>
 </body>
